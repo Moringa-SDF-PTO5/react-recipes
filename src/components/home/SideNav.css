@@ -1,0 +1,25 @@
+.nav-item {
+    border-bottom: 2px dotted gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.nav-item-primary {
+    font-weight: 400;
+    font-size: medium;
+}
+
+.nav-item-secondary {
+    font-weight: 200;
+    font-size: small;
+}
+
+.nav-menu {
+    list-style: none;
+    list-style-type: none;
+    padding: 0;
+    margin-left: 5%;
+    margin-right: 5%;
+}
