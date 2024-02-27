@@ -1,12 +1,12 @@
 import './MainView.css';
 
-function MainView(){
+function MainView(props){
     return (
         <>
             <MainAppBar />
 
             <section>
-                Images go here
+                {props.children}
             </section>  
         </>
     )

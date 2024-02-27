@@ -9,7 +9,10 @@ function Home(){
         </aside>
   
         <main className='main'>
-          <MainView />
+          <MainView>
+            <h2>This is a child header</h2>
+            <iframe style={{width: 200, height: 200}} src="https://www.youtube.com/embed/4k6Xgjqkad4"></iframe>
+          </MainView>
         </main>
     </div>
     )
