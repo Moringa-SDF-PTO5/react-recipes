@@ -2,22 +2,23 @@ import './SideNav.css'
 
 // nav menu items
 const menuItems = [
-    { title: "Breakfast", count: 4 },
-    { title: "Dessert", count: 9 },
-    { title: "Meat and poultry", count: 7 },
-    { title: "Pasta and pizza", count: 20 },
-    { title: "Salads", count: 3 },
-    { title: "Snacks", count: 12 },
-    { title: "Soups", count: 8 },
-    { title: "Other", count: 4 },
+    { id: 1, title: "Breakfast", count: 4 },
+    { id: 2, title: "Dessert", count: 9 },
+    { id: 3, title: "Meat and poultry", count: 7 },
+    { id: 4, title: "Pasta and pizza", count: 20 },
+    { id: 5, title: "Salads", count: 3 },
+    { id: 6, title: "Snacks", count: 12 },
+    { id: 7, title: "Soups", count: 8 },
+    { id: 8, title: "Breakfast", count: 4 },
 ];
 
 
 function SideNav(){
 
-    const convertMenuToJSX = ({title, count}) => {
+    const convertMenuToJSX = ({title, count, id}, index) => {
+        const key = crypto.randomUUID()
         return (
-        <li>
+        <li key={key}>
          <NavItem title={title} count={count} /> 
         </li>
         )
