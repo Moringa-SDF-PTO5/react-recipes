@@ -32,7 +32,6 @@ function Home(){
       };
       return item;
     });
-    console.log(`food:`, foodItemsList);
     setFoodItems(foodItemsList)
   }
 
@@ -47,14 +46,14 @@ function Home(){
       }
       return category
     });
-    loadFoodItems(catList[0].title, setUpFood)
+    selectCategory(catList[0].title)
     setCategories(catList);
   }
 
   
   const [categorySelected, selectCategory] = useState("");
   const changeMenu = (category) => {
-    console.log("selected category", category);
+    console.log("selected category", category)
     selectCategory(category)
   }
 
@@ -75,7 +74,7 @@ function Home(){
         </aside>
   
         <main className='main'>
-          <MainView />
+          <MainView foodItems={foodItems} />
         </main>
     </div>
     )

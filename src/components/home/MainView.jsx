@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import './MainView.css';
+import FoodItemCard from './FoodItemCard';
 
-function MainView(props){
+function MainView({foodItems}){
+
+    console.log("items", foodItems);
 
     const [count, setCount] = useState(0)
     const [search, setSearch] = useState("")
@@ -29,7 +32,9 @@ function MainView(props){
 
             <section>
                 <h2>This is a child header</h2>
-                <iframe style={{width: 200, height: 200}} src="https://www.youtube.com/embed/4k6Xgjqkad4"></iframe>
+                
+                <FoodItemCard/>
+      
             </section>  
         </>
     )
