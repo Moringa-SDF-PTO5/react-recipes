@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './FoodItemCard.css';
 
 function FoodItemCard() {
@@ -11,9 +12,9 @@ function FoodItemCard() {
                 </div>
             </div>
             <div className="card-image"></div>
-            <a className="card-link">
+            <Link to='/recipe/90' className="card-link">
                 <div className="card-hover-image"></div>
-            </a>
+            </Link>
             <div className="card-info">
                 <span className="card-category">Breakfast</span>
                 <h4 className="card-title">Escovitch Fish</h4>
