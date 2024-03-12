@@ -2,12 +2,22 @@ import { useState } from 'react';
 import './MainView.css';
 import FoodItemCard from './FoodItemCard';
 
-function MainView({foodItems}){
+function MainView({foodItems, category, isActiveCategory, toggleIsActiveCategory}){
 
-    console.log("items", foodItems);
+    const foodItemsUi = foodItems.map((item) => {
+        return (
+        <FoodItemCard 
+            mealName={item.name} 
+            thumbnail={item.thumbnail}
+            mealId={item.id}
+            category={category}
+            key={item.id}
+        />)
+    });
 
     const [count, setCount] = useState(0)
     const [search, setSearch] = useState("")
+    const [isSearch, setIsSearch] = useState(!isActiveCategory);
 
     function updateState(){
         const square = count * count;
@@ -20,6 +30,12 @@ function MainView({foodItems}){
         setSearch(value)
     }
 
+    function onSearchStarted(){
+        // submit the search
+        toggleIsActiveCategory();
+        setIsSearch(true);
+    }
+
 
     return (
         <>
@@ -28,39 +44,49 @@ function MainView({foodItems}){
                 updateCount={updateState} 
                 searchTerm={search}
                 onUpdateSearch={updatingSearch}
+                onSearchStarted={onSearchStarted}
                  />
 
             <section>
-                <h2>This is a child header</h2>
-                
-                <FoodItemCard/>
-      
+                {isSearch && <h2>Results for '{search}'</h2>} 
+                <div className='food-items'>
+                    {foodItemsUi}
+                </div>
             </section>  
         </>
     )
 }
 
-const MainAppBar = ({ count, updateCount, searchTerm, onUpdateSearch }) => {
+const MainAppBar = ({searchTerm, onUpdateSearch, onSearchStarted }) => {
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        onSearchStarted();
+    }
+
     return (
         <div className="main-app-bar">
             <div className="app-bar-item">
-                <span>Search Icon</span>
-                <input 
-                    className="search-input" 
-                    type="text" 
-                    placeholder="Search for recipe"
-                    value={searchTerm}
-                    onChange={(e) => { 
-                        const newValue = e.target.value
-                        onUpdateSearch(newValue)
-                     }}
-                />
-                <p>{count}</p>
-                <button onClick={updateCount}>Click Me</button>
+                <span className='material-symbols-outlined'>search</span>
+                <form onSubmit={handleFormSubmit}>
+                    <input 
+                        className="search-input" 
+                        type="text" 
+                        placeholder="Search for recipe.."
+                        value={searchTerm}
+                        onChange={(e) => { 
+                            const newValue = e.target.value
+                            onUpdateSearch(newValue)
+                        }}
+                    />
+                </form>    
             </div>
-            <button className="app-bar-item">
-                <span>plus icon</span>
-                <p>New recipe</p>
+            <button className="transparent-btn">
+                <div className='app-bar-item'>
+                    <span class="material-symbols-outlined">add_circle</span>
+                    <span style={{marginLeft: 7}}>New recipe</span>
+                </div>
+                
             </button>
         </div>
     )

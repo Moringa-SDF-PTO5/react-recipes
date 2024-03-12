@@ -3,3 +3,27 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.food-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.search-input {
+    padding: 10px;
+    outline: none;
+    border: none;
+}
+
+.app-bar-item {
+    display: flex;
+    align-items: center;
+}
+
+.transparent-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

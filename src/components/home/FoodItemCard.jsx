@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import './FoodItemCard.css';
 
-function FoodItemCard() {
+function FoodItemCard( {mealName, thumbnail, mealId, category} ) {
+
+    const imageStyle = { backgroundImage: `url(${thumbnail})` };
+
     return (
         <article className="card">
             <div className="card-hover-info">
@@ -11,13 +14,13 @@ function FoodItemCard() {
                     <span>20 min</span>
                 </div>
             </div>
-            <div className="card-image"></div>
-            <Link to='/recipe/90' className="card-link">
-                <div className="card-hover-image"></div>
+            <div className="card-image" style={imageStyle}></div>
+            <Link to={`/recipe/${mealId}`} className="card-link">
+                <div className="card-hover-image" style={imageStyle}></div>
             </Link>
             <div className="card-info">
-                <span className="card-category">Breakfast</span>
-                <h4 className="card-title">Escovitch Fish</h4>
+                <span className="card-category">{category}</span>
+                <h4 className="card-title">{mealName}</h4>
                 <span className="card-meta">Kenyan</span>
             </div>
         </article>

@@ -19,6 +19,7 @@ const loadFoodItems = (category, setUpFxn) => {
   .then((body) => setUpFxn(body))
 }
 
+
 function Home(){
 
   const [foodItems, setFoodItems] = useState([]);
@@ -50,12 +51,18 @@ function Home(){
     setCategories(catList);
   }
 
+  const [isActiveCategory, toggleActivation] = useState(true);
+  const toggleIsActiveCategory = () => {
+    toggleActivation(!isActiveCategory)
+  }
   
   const [categorySelected, selectCategory] = useState("");
   const changeMenu = (category) => {
-    console.log("selected category", category)
     selectCategory(category)
+    toggleActivation(true);
   }
+  
+
 
   // load all categories once
   useEffect(() => {
@@ -74,7 +81,12 @@ function Home(){
         </aside>
   
         <main className='main'>
-          <MainView foodItems={foodItems} />
+          <MainView 
+            foodItems={foodItems} 
+            category={categorySelected}
+            isActiveCategory={isActiveCategory}
+            toggleIsActiveCategory={toggleIsActiveCategory}
+          />
         </main>
     </div>
     )
