@@ -1,8 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './MainView.css';
 import FoodItemCard from './FoodItemCard';
 
-function MainView({foodItems, category, isActiveCategory, toggleIsActiveCategory}){
+const searchFoodURL = (item) => `https://www.themealdb.com/api/json/v1/1/search.php?s=${item}`;
+
+const loadSearchResults = (searchTerm, setUpFxn) => {
+    fetch(searchFoodURL(searchTerm))
+    .then((res) => res.json())
+    .then((body) => setUpFxn(body));
+}
+
+function MainView({
+    foodItems, 
+    category, 
+    isActiveCategory, 
+    toggleIsActiveCategory, 
+    updateFoodItems,
+}){
 
     const foodItemsUi = foodItems.map((item) => {
         return (
@@ -18,6 +32,7 @@ function MainView({foodItems, category, isActiveCategory, toggleIsActiveCategory
     const [count, setCount] = useState(0)
     const [search, setSearch] = useState("")
     const [isSearch, setIsSearch] = useState(!isActiveCategory);
+    const [searching, toggleSearching] = useState(false);
 
     function updateState(){
         const square = count * count;
@@ -32,9 +47,27 @@ function MainView({foodItems, category, isActiveCategory, toggleIsActiveCategory
 
     function onSearchStarted(){
         // submit the search
+        toggleSearching(!searching);
         toggleIsActiveCategory();
         setIsSearch(true);
     }
+
+    function setUpResults(body){
+        const meals = body["meals"];
+        const foodItemsList = meals.map((foodItem) => {
+        const item = {
+            id: foodItem["idMeal"],
+            thumbnail: foodItem["strMealThumb"],
+            name: foodItem["strMeal"]
+        };
+            return item;
+        });
+        updateFoodItems(foodItemsList);
+    }
+
+    useEffect(() => {
+        loadSearchResults(search, setUpResults);
+    }, [searching]);
 
 
     return (

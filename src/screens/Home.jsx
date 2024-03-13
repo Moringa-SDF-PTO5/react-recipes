@@ -86,6 +86,7 @@ function Home(){
             category={categorySelected}
             isActiveCategory={isActiveCategory}
             toggleIsActiveCategory={toggleIsActiveCategory}
+            updateFoodItems={ (foodItemList) => setFoodItems(foodItemList) }
           />
         </main>
     </div>
